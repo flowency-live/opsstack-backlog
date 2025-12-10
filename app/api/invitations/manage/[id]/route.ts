@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import prisma from '@/lib/prisma';
 
-// DELETE /api/invitations/[id] - Cancel/delete an invitation
+// DELETE /api/invitations/manage/[id] - Cancel/delete an invitation
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

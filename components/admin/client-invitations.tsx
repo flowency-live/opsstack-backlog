@@ -98,7 +98,7 @@ export function ClientInvitations({ invitations, clientId, clientSlug }: Props) 
 
   const handleCancelInvitation = async (invitationId: string) => {
     try {
-      const response = await fetch(`/api/invitations/${invitationId}`, {
+      const response = await fetch(`/api/invitations/manage/${invitationId}`, {
         method: 'DELETE',
       });
 
