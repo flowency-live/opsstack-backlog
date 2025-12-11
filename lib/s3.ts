@@ -6,15 +6,15 @@ import {
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
-const s3Client = new S3Client({
-  region: process.env.AWS_REGION || 'eu-west-2',
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
-  },
-});
+// S3 Configuration - uses IAM role credentials automatically in AWS environments
+const S3_REGION = 'eu-west-2';
+const BUCKET_NAME = 'kavostack-backlog-attachments';
 
-const BUCKET_NAME = process.env.AWS_S3_BUCKET || 'flowency-backlog-attachments';
+const s3Client = new S3Client({
+  region: S3_REGION,
+  // In AWS (Amplify/Lambda), credentials are automatically provided via IAM role
+  // For local development, uses ~/.aws/credentials or environment variables
+});
 
 /**
  * Generate a presigned URL for uploading a file
@@ -78,7 +78,7 @@ export function generateS3Key(
  * Note: We use presigned URLs instead for security
  */
 export function getPublicUrl(key: string): string {
-  return `https://${BUCKET_NAME}.s3.${process.env.AWS_REGION || 'eu-west-2'}.amazonaws.com/${key}`;
+  return `https://${BUCKET_NAME}.s3.${S3_REGION}.amazonaws.com/${key}`;
 }
 
 /**
