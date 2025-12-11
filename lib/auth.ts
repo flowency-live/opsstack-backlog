@@ -36,6 +36,7 @@ interface ExtendedJWT {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  trustHost: true, // Required for Amplify/proxied environments
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
