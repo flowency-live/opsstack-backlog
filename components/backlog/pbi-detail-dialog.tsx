@@ -184,7 +184,7 @@ export function PbiDetailDialog({
           <TabsList>
             <TabsTrigger value="details">Details</TabsTrigger>
             <TabsTrigger value="comments">
-              Comments ({pbi._count.comments})
+              Comments ({pbi._count?.comments ?? 0})
             </TabsTrigger>
           </TabsList>
 

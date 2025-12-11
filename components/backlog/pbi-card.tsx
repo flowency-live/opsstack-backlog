@@ -94,13 +94,13 @@ export function PbiCard({ pbi, isDragging, onClick }: Props) {
                 {pbi.effort}
               </span>
             )}
-            {pbi._count.comments > 0 && (
+            {pbi._count?.comments > 0 && (
               <span className="flex items-center gap-1">
                 <CommentIcon className="w-3.5 h-3.5" />
                 {pbi._count.comments}
               </span>
             )}
-            {pbi._count.attachments > 0 && (
+            {pbi._count?.attachments > 0 && (
               <span className="flex items-center gap-1">
                 <AttachmentIcon className="w-3.5 h-3.5" />
                 {pbi._count.attachments}
