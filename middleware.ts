@@ -1,47 +1,41 @@
-import { auth } from '@/lib/auth';
 import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-export default auth((req) => {
-  const { nextUrl } = req;
-  const isAuthenticated = !!req.auth;
+// Public routes that don't require authentication
+const publicRoutes = ['/', '/login', '/invite'];
 
-  // Public routes that don't require authentication
-  const publicRoutes = ['/', '/login', '/invite'];
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Allow public routes
   const isPublicRoute = publicRoutes.some(
-    (route) => nextUrl.pathname === route || nextUrl.pathname.startsWith('/invite/')
+    (route) => pathname === route || pathname.startsWith('/invite/')
   );
 
-  // API routes for auth are always public
-  const isAuthApi = nextUrl.pathname.startsWith('/api/auth');
+  // Allow API auth routes
+  const isAuthApi = pathname.startsWith('/api/auth');
 
-  if (isAuthApi) {
+  // Allow static files and images
+  if (isAuthApi || isPublicRoute) {
     return NextResponse.next();
   }
 
-  // Redirect authenticated users away from login
-  if (isAuthenticated && nextUrl.pathname === '/login') {
-    return NextResponse.redirect(new URL('/dashboard', nextUrl));
-  }
+  // For protected routes, check for session cookie
+  // Actual auth verification happens server-side in layouts/pages
+  const sessionToken = request.cookies.get('authjs.session-token') ||
+                       request.cookies.get('__Secure-authjs.session-token');
 
-  // Redirect unauthenticated users to login
-  if (!isAuthenticated && !isPublicRoute) {
-    const loginUrl = new URL('/login', nextUrl);
-    loginUrl.searchParams.set('callbackUrl', nextUrl.pathname);
+  if (!sessionToken && !isPublicRoute) {
+    const loginUrl = new URL('/login', request.url);
+    loginUrl.searchParams.set('callbackUrl', pathname);
     return NextResponse.redirect(loginUrl);
   }
 
   return NextResponse.next();
-});
+}
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public files (public folder)
-     */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\..*|api/auth).*)',
+    '/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)',
   ],
 };
