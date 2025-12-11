@@ -252,10 +252,27 @@ export async function bulkReorderPbis(
   clientId: string,
   orderedIds: string[]
 ): Promise<void> {
+  // First verify all PBIs belong to this client
+  const pbis = await prisma.pbi.findMany({
+    where: {
+      id: { in: orderedIds },
+      clientId,
+    },
+    select: { id: true },
+  });
+
+  const validIds = new Set(pbis.map((p) => p.id));
+  const invalidIds = orderedIds.filter((id) => !validIds.has(id));
+
+  if (invalidIds.length > 0) {
+    throw new Error(`PBIs not found or don't belong to this client: ${invalidIds.join(', ')}`);
+  }
+
+  // Update positions using individual updates (id is the unique primary key)
   await prisma.$transaction(
     orderedIds.map((id, index) =>
       prisma.pbi.update({
-        where: { id, clientId },
+        where: { id },
         data: { stackPosition: index + 1 },
       })
     )
