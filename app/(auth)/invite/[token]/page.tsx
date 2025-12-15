@@ -138,7 +138,7 @@ export default function InvitePage() {
     <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Join Flowency Backlog</CardTitle>
+          <CardTitle className="text-2xl font-bold">Join OpsStack Backlog</CardTitle>
           <CardDescription>
             {inviteData?.inviterName} has invited you to collaborate on{' '}
             <strong>{inviteData?.clientName}</strong>

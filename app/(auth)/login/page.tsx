@@ -52,7 +52,7 @@ function LoginForm() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold">Flowency Backlog</CardTitle>
+        <CardTitle className="text-2xl font-bold">OpsStack Backlog</CardTitle>
         <CardDescription>
           Sign in to collaborate on your product backlog
         </CardDescription>
@@ -62,7 +62,7 @@ function LoginForm() {
         {(error || loginError) && (
           <div className="p-3 text-sm text-red-600 bg-red-50 rounded-md">
             {error === 'OAuthAccountNotLinked'
-              ? 'This email is not registered. Contact your Flowency project manager.'
+              ? 'This email is not registered. Contact your OpsStack project manager.'
               : loginError || 'An error occurred during sign in.'}
           </div>
         )}
@@ -158,7 +158,7 @@ function LoginForm() {
         </form>
 
         <p className="text-center text-sm text-muted-foreground">
-          Need access? Contact your Flowency project manager.
+          Need access? Contact your OpsStack project manager.
         </p>
       </CardContent>
     </Card>
@@ -169,7 +169,7 @@ function LoginFallback() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold">Flowency Backlog</CardTitle>
+        <CardTitle className="text-2xl font-bold">OpsStack Backlog</CardTitle>
         <CardDescription>Loading...</CardDescription>
       </CardHeader>
     </Card>

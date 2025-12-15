@@ -81,7 +81,7 @@ export default function AdminLayout({
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Admin Access Required</h1>
           <p className="text-gray-600 mb-4">
-            This area is restricted to Flowency administrators.
+            This area is restricted to OpsStack administrators.
           </p>
           <Link href="/">
             <Button variant="outline">Go Home</Button>
@@ -105,9 +105,9 @@ export default function AdminLayout({
         <div className="p-6 border-b">
           <Link href="/dashboard" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">FB</span>
+              <span className="text-white font-bold text-sm">OS</span>
             </div>
-            <span className="font-semibold text-lg">Flowency Backlog</span>
+            <span className="font-semibold text-lg">OpsStack Backlog</span>
           </Link>
         </div>
 

@@ -7,9 +7,9 @@ export default function Home() {
     <main className="min-h-screen flex items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md mx-4">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Flowency Backlog</CardTitle>
+          <CardTitle className="text-2xl font-bold">OpsStack Backlog</CardTitle>
           <CardDescription>
-            Product backlog collaboration for Flowency Build clients
+            Product backlog collaboration for OpsStack clients
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -19,7 +19,7 @@ export default function Home() {
             </Button>
           </Link>
           <p className="text-center text-sm text-muted-foreground">
-            Need access? Contact your Flowency project manager.
+            Need access? Contact your OpsStack project manager.
           </p>
         </CardContent>
       </Card>
